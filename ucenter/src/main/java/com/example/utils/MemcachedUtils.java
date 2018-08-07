@@ -1,7 +1,7 @@
 package com.example.utils;
 
-import com.danga.MemCached.MemCachedClient;
-import com.danga.MemCached.SockIOPool;
+import com.whalin.MemCached.MemCachedClient;
+import com.whalin.MemCached.SockIOPool;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
@@ -18,7 +18,7 @@ public class MemcachedUtils {
         /************************************配置Memcached**************************************/
         SockIOPool sockIOPool = SockIOPool.getInstance();
 
-        sockIOPool.setServers(new String[]{"192.168.50.128:11211"});//设置memcached服务器地址
+        sockIOPool.setServers(new String[]{"127.0.0.1:11210"});//设置memcached服务器地址
         sockIOPool.setWeights(new Integer[]{3}); 				//设置每个MemCached服务器权重
         sockIOPool.setFailover(true);  						//当一个memcached服务器失效的时候是否去连接另一个memcached服务器.
         sockIOPool.setInitConn(10);    						//初始化时对每个服务器建立的连接数目
@@ -161,7 +161,8 @@ public class MemcachedUtils {
      */
     public static boolean delete(String key, Date expireDate) {
         try {
-            return memCachedClient.delete(key, expireDate);
+            return memCachedClient.delete(key);
+            //return memCachedClient.delete(key, expireDate);
         } catch (Exception e) {
             MemcachedLogUtils.writeLog("Memcached delete方法报错，key值：" + key + "\r\n" + exceptionWrite(e));
             return false;

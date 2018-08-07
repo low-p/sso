@@ -2,21 +2,21 @@ spring:
   freemarker:
     request-context-attribute: request
   datasource:
-    name: mydb
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/sso
-    username: mzh
-    password: mzh
+    url: jdbc:mysql://127.0.0.1:3306/springboottest?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
-    minIdle: 1
-    maxActive: 2
-    initialSize: 1
-    timeBetweenEvictionRunsMillis: 3000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 'ZTM' FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
+    dbcp2:
+      min-idle: 1
+      max-open-prepared-statements: 2
+      initialSize: 1
+      timeBetweenEvictionRunsMillis: 3000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'root' FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
 
 sso:
   repeatLogin: true
